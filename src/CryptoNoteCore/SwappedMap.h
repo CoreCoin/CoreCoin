@@ -13,6 +13,7 @@
 #include <vector>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
+#include <iostream>
 
 template<class Key, class T> class SwappedMap {
 private:
@@ -173,7 +174,7 @@ template<class Key, class T> bool SwappedMap<Key, T>::open(const std::string& it
   }
 
   m_poolSize = poolSize;
-  m_items.clear();
+  m_items.clear();  
   m_cache.clear();
   m_cacheIterators.clear();
   m_cacheHits = 0;
@@ -182,6 +183,7 @@ template<class Key, class T> bool SwappedMap<Key, T>::open(const std::string& it
 }
 
 template<class Key, class T> void SwappedMap<Key, T>::close() {
+
   std::cout << "SwappedMap cache hits: " << m_cacheHits << ", misses: " << m_cacheMisses << " (" << std::fixed << std::setprecision(2) << static_cast<double>(m_cacheMisses) / (m_cacheHits + m_cacheMisses) * 100 << "%)" << std::endl;
 }
 
